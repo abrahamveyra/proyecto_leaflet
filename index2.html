@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js" integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s=" crossorigin=""></script>
+    <title>Document</title>
+
+    <style>
+        #map {position: absolute; top:0; bottom: 0; left: 0; right: 0;}
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([51.5, -0.09],13);
+        L.tileLayer('https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=GBvFUA6deUYodH6jOhHE', {
+            attribution : '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+        }).addTo(map)
+
+        var leafletIcon =L.icon ({
+            iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
+            shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+            iconSize: [38,95],
+            iconAnchor: [22,94],
+            shadowAnchor: [4,62],
+            popupAnchor: [12,-90]
+        })
+
+       var marker =L.marker([51.5, -0.09],{icon:leafletIcon},).addTo(map) 
+
+var circle = L.circle([51.508, -0.011], 500, {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5
+}).addTo(map);
+
+var polygon = L.polygon([
+[51.512, -0.08],
+    [51.509, -0.08],
+    [51.503, -0.06],
+    [51.51, -0.047],
+]).addTo(map)
+
+marker.bindPopup("<b>tu estas aqui</b><br> yo soy el marcador").openPopup();
+circle.bindPopup("yo soy un circulo");
+polygon.bindPopup("esta es una parcela")
+    </script>
+</body>
+</html>
